@@ -1,22 +1,27 @@
 from flet import *
-from variable_data import variable_data, encoding
 from random import randint
-from neural_network import NeuralNetwork
 
-nn = NeuralNetwork(file_path='weights.txt')
+from controllers import NeuralNetwork
+from data import variable_data, encoding
+from controllers import scan_weights
 
+def classification_view(page: Page) -> View:
+    global selected_nn
+    selected_nn = NeuralNetwork(file_path='data/weights/weights.txt')
 
-def main(page: Page):
-    page.title = 'Mushroom Recognition'
-    page.theme_mode = 'dark'
-    page.window.width = 400
-    page.window.height = 600
-
+    view = View('/')
     title_control = Container(
         Text("Mushroom Recognition", size=40), margin=40
     )
 
     button_style = ButtonStyle(text_style=TextStyle(size=25))
+
+    weights = Dropdown(
+        options = [dropdown.Option(w_name) for w_name in scan_weights()],
+        text_style=TextStyle(25),
+        value='weights.txt'
+    )
+    nt_button = FilledTonalButton("Network training ->", style=button_style)
 
     button_random = Container(FilledTonalButton("Randomize", 
         style=button_style, width=200, height=50
@@ -27,8 +32,8 @@ def main(page: Page):
     ), margin=30)
 
 
-    image_skull = Image('resources/skull.png', height=150 ,width=300)
-    image_smile = Image('resources/laughing.png', height=150, width=300)
+    image_skull = Image('data/resources/skull.png', height=150 ,width=300)
+    image_smile = Image('data/resources/laughing.png', height=150, width=300)
     popup = AlertDialog(
         title=Text("Popup test"),
         actions=[
@@ -36,8 +41,11 @@ def main(page: Page):
         ],
     )
 
+
     # ADDING 
-    page.add(Row(controls=[title_control], alignment=MainAxisAlignment.CENTER))
+    rows_controlls = []
+    rows_controlls.append(Row(controls=[title_control], alignment=MainAxisAlignment.CENTER))
+    rows_controlls.append(Row([weights, nt_button], alignment='center'))
 
     columns = []
     for i in range(0,2):
@@ -50,9 +58,9 @@ def main(page: Page):
                 Dropdown(options=options, width=200),
             ]))
         columns.append(Column(rows))
-    page.add(Row(controls=columns, spacing=100, alignment=MainAxisAlignment.CENTER))
+    rows_controlls.append(Row(controls=columns, spacing=100, alignment=MainAxisAlignment.CENTER))
     
-    page.add(Row(
+    rows_controlls.append(Row(
         controls=[button_random, button_submit],
         alignment=MainAxisAlignment.CENTER,
         spacing=50
@@ -81,15 +89,21 @@ def main(page: Page):
                 half_encoded_value = variable_data[idx]['options'][variable_value]
                 encoded_value = encoding[variable_name][half_encoded_value]
                 values.append(encoded_value)
-        nn.forwardsPropagation(values)
-        s = 1 if nn.neurons[-1] > 0.5 else 0
+        selected_nn.forwardsPropagation(values)
+        s = 1 if selected_nn.neurons[-1] > 0.5 else 0
         message = "This looks like it could kill you mate." if s == 1 else "I think you can eat this"
         popup.title=Text(message)
         popup.content = image_skull if s == 1 else image_smile
         page.open(popup)
+
+    def nn_selected(e: ControlEvent) -> None:
+        global selected_nn
+        selected_nn = NeuralNetwork(file_path='data/weights/' + weights.value)
         
     button_random.content.on_click = random_values
     button_submit.content.on_click = predict
+    weights.on_change = nn_selected
 
-if __name__ == "__main__":
-    app(target=main)
+    view.controls = rows_controlls
+    nt_button.on_click = lambda e: page.go('/nl')
+    return view

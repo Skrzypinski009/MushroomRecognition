@@ -1,2 +1,6 @@
-/__pycache__
-/venv
+__pycache__/
+venv/
+src/data/dataset.csv
+src/data/plot.png
+src/data/weights/*
+!src/data/weights/weights.txt
