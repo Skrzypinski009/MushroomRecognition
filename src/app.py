@@ -4,6 +4,7 @@ import requests
 from views import classification_view
 from views import network_learning_view
 from controllers import download_dataset_with_check
+import matplotlib.pyplot as plt
 
 def main(page: Page):
     page.title = 'Rozpoznawanie Grzybów'
