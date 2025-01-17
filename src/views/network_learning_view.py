@@ -1,12 +1,13 @@
 from flet import *
 import os
 from controllers import NeuralNetwork
-from controllers import train, scan_weights
+from controllers import train, scan_weights, make_plot
 from time import sleep
 
+cur_plot_nr = 0
 
 def getImage(path):
-    new_image = Image(path)
+    new_image = Image(path, width=500)
     return new_image
 
 def get_list_from(layers_sizes: str) -> list|None:
@@ -72,6 +73,13 @@ def network_learning_view(page) -> View:
     training_text = Text("Trenowanie...", visible=False)
     row13 = Row([training_text], alignment='center')
 
+    pb = ProgressBar(0, color='white', width=500, visible=False)
+    pb.value = 0
+    row14 = Row([pb], alignment='center')
+
+    result = Text("", style=h2_style)
+    row15 = Row([result], alignment='center')
+
     view.controls = [Column([
         title_row,
         row1,
@@ -84,6 +92,8 @@ def network_learning_view(page) -> View:
         row11,
         row12,
         row13,
+        row14,
+        row15
     ])]
 
     def nn_selected(e: ControlEvent) -> None:
@@ -108,17 +118,30 @@ def network_learning_view(page) -> View:
         print("all good")
 
         training_text.visible=True
+        pb.visible = True
+        pb.value = 0
+        result.visible = False
         row12.controls = []
-        if os.path.exists('data/plot.png'): os.remove('data/plot.png')
+        # if os.path.exists('data/plot.png'): os.remove('data/plot.png')
         view.update()
         training_wait()
 
     def training_wait():
         global selected_nn
-        train(selected_nn, int(iterations.value))
+        global cur_plot_nr
+        cur_plot_nr += 1
+
+        err_arr = train(selected_nn, int(iterations.value), cur_plot_nr, view)
+        make_plot(err_arr['train'], 'data/train_err_plot' + str(cur_plot_nr) + '.png', "Training data error")
+        make_plot(err_arr['test'], 'data/test_err_plot' + str(cur_plot_nr) + '.png', "Testing data error")
+
         training_text.visible = False
-        image_path = 'data/plot.png'
-        row12.controls.append(getImage(image_path))
+        pb.visible = False
+        result.visible = True
+        train_err_plot = 'data/train_err_plot' + str(cur_plot_nr) + '.png'
+        test_err_plot = 'data/test_err_plot' + str(cur_plot_nr) + '.png'
+        row12.controls.append(getImage(train_err_plot))
+        row12.controls.append(getImage(test_err_plot))
         view.update()
 
     def create_pressed(e: ControlEvent):

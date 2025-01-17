@@ -138,9 +138,8 @@ class NeuralNetwork:
                     self.weights[ w_index - w ] += self.neurons[ index - size - w ] * 0.2 * d[ d_index ]
                 w_index -= prev_size
             index -= size
-        return d
-        
-        
+        # return d
 
-
-    
+    def get_error(self, expected_result): 
+        return (self.neurons[-1] - expected_result) ** 2
+        

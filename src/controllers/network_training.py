@@ -7,6 +7,7 @@ import requests
 import os
 import zipfile
 import time
+from flet import View
 
 from . import NeuralNetwork
 import data
@@ -69,7 +70,8 @@ def get_dataset_from_uci():
 def get_merged(dataset):
     dataset.drop_duplicates()
     dataset.replace({'stalk-root': [np.nan]}, {'stalk-root': ['?']}, inplace=True)
-    return dataset.sample(frac = 1)
+    return dataset.sample(frac = 1, random_state=0)
+    # return dataset
 #end
 
 def get_numerical_data(categorical_data: pd.DataFrame) -> pd.DataFrame:
@@ -106,32 +108,46 @@ def get_training_and_testing_data(
 #end
 
 def train_NN(
-    nn: NeuralNetwork, training_data: pd.DataFrame, training_y: pd.Series,
-    iterations: int, accuracy: float, err_arr: list) -> list:
+    nn: NeuralNetwork,
+    training_data: pd.DataFrame, training_y: pd.Series,
+    testing_data: pd.DataFrame, testing_y: pd.Series,
+    iterations: int, accuracy: float, err_arr: dict, view: View) -> list:
+
 
     i = 0
     for i in range(iterations):
-        good = True
-        dd = 0
+        dd = []
+        ee = []
         for j in range(training_data.shape[0]):
             nn.forwardsPropagation(training_data.iloc[j])
-            d = nn.backwardsPropagation([training_y.iloc[j]])
-            dd += np.sum(np.absolute(d))
+            d = nn.get_error(training_y.iloc[j])
+            dd.append(d)
+            nn.backwardsPropagation([training_y.iloc[j]])
+        for j in range(testing_data.shape[0]):
+            nn.forwardsPropagation(testing_data.iloc[j])
+            e = nn.get_error(testing_y.iloc[j])
+            ee.append(e)
 
-        if(dd > 0.3):
-            good = False
-            err_arr.append(dd)
-        else: 
+        err_arr['train'].append(np.sum(dd))
+        err_arr['test'].append(np.sum(ee))
+
+        view.controls[0].controls[11].controls[0].value = (i+1) / iterations
+        view.update()
+
+        if(np.sum(dd) < 0.000003):
             print(f"brakeing at: {i+1} iteration")
             break
 #end
 
-def make_plot(err_arr: list, save_path: str) -> None:
+def make_plot(err_arr: list, save_path: str, title: str = "") -> None:
+    plt.clf()
     x = np.arange(1,len(err_arr)+1,1)
     plt.xlabel("Iterations")
     plt.ylabel("Error")
+    plt.title(title)
     plt.plot(x, err_arr, c="black", lw="2" )
     plt.savefig(save_path)
+    plt.close()
 #end
 
 def get_ready_data() -> list:
@@ -142,17 +158,20 @@ def get_ready_data() -> list:
     return get_training_and_testing_data(x, y, 0.7)
 #end
 
-def train(nn: NeuralNetwork, iterations: int,) -> None:
+def train(nn: NeuralNetwork, iterations: int, plot_nr: int, view: View) -> None:
     (train_features,
     train_target,
     test_fretures,
     test_target) = get_ready_data()
 
-    err_arr = []
-    train_NN(nn, train_features, train_target, iterations, 10, err_arr)
-    print(err_arr)
-    make_plot(err_arr, 'data/plot.png')
-    time.sleep(10)
+    err_arr = {'train': [], 'test': []}
+    train_NN(
+        nn,
+        train_features, train_target,
+        test_fretures, test_target,
+        iterations, 10, err_arr, view)
+    view.controls[0].controls[12].controls[0].value = "Effectiveness: " + str(get_correct_results(nn, test_fretures, test_target)['procentage']) + "%"
+    return err_arr
 #end
 
 def scan_weights() -> list:
@@ -161,3 +180,16 @@ def scan_weights() -> list:
         weights_list.append(file)
     return weights_list
 #end
+
+
+def get_correct_results(nn: NeuralNetwork, testing_data: pd.DataFrame, testing_y: pd.Series) -> dict:
+    correct = 0
+    for j in range(testing_data.shape[0]):
+        nn.forwardsPropagation(testing_data.iloc[j])
+        s = 1 if nn.neurons[-1] > 0.5 else 0
+        if s == testing_y.iloc[j]:
+            correct += 1
+    return {
+        'procentage': correct / testing_data.shape[0] * 100,
+        'count': correct,
+        'all': testing_data.shape[0]}
