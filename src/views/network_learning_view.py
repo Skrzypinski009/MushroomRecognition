@@ -32,44 +32,44 @@ def network_learning_view(page) -> View:
     error_style = TextStyle(20, color='red')
     button_style = ButtonStyle(text_style=h2_style)
 
-    title = Text("Neural network training", style=h1_style)
+    title = Text("Trenowanie sieci neuronowej", style=h1_style)
     title_row = Row([title], alignment='center')
 
-    back_button = FilledTonalButton("<- Classification", style=button_style)
+    back_button = FilledTonalButton("<- Klasyfikacja", style=button_style)
     row1 = Row([back_button], alignment='center')
 
     layers_field = TextField(width=300, text_style=h2_style)
     row2 = Row([
-        Text("Hidden layers sizes separeted by ','", style=h2_style),
+        Text("Ukryte rozmiary warstw rozdzielone ','", style=h2_style),
         layers_field,
     ], alignment='center')
 
     network_name_field = TextField(width=300, text_style=h2_style)
     row5 = Row([
-        Text("Name of weights:", style=h2_style),
+        Text("Nazwa wag:", style=h2_style),
         network_name_field,
     ], alignment='center')
 
-    create_button = FilledButton("Create", style=ButtonStyle(text_style=h2_style), width=160, height=40)
+    create_button = FilledButton("Stwórz", style=ButtonStyle(text_style=h2_style), width=160, height=40)
     row7 = Row([create_button], alignment='center')
 
     error_message = Text("", style=error_style)
     row8 = Row([error_message], alignment='center')
 
-    row9 = Row([Text("Or select saved weights", style=h2_style)], alignment='center')
+    row9 = Row([Text("Albo wybierz istniejace", style=h2_style)], alignment='center')
     dropdown_weights = Dropdown(options=[], text_style=h2_style)
     row10 = Row([dropdown_weights], alignment='center')
 
     iterations = TextField('', text_style=h2_style, text_align='center', width=50)
     train_button = FilledTonalButton("Train", style=ButtonStyle(text_style=h2_style), width=150, height=40)
     row11 = Row([ 
-        Text('Iterations ', style=h2_style), 
+        Text('Iteracje ', style=h2_style), 
         iterations,
         train_button
     ], alignment='center')
 
     row12 = Row([], alignment='center')
-    training_text = Text("Training...", visible=False)
+    training_text = Text("Trenowanie...", visible=False)
     row13 = Row([training_text], alignment='center')
 
     view.controls = [Column([
@@ -94,7 +94,7 @@ def network_learning_view(page) -> View:
     
     def print_nn():
         global selected_nn
-        print("nn selected: " + str(selected_nn))
+        print("nn wybrane: " + str(selected_nn))
 
     def train_pressed(e: ControlEvent) -> None:
         # sizes_list = get_list_from(layers_field.value)
@@ -124,7 +124,7 @@ def network_learning_view(page) -> View:
     def create_pressed(e: ControlEvent):
         hidden_sizes = get_list_from(layers_field.value)
         if not hidden_sizes:
-            error_message.value = "Layers sizes input is not correct"
+            error_message.value = "Nie poprawny rozmiar warstw"
             page.update()
             return
         sizes = [22] + hidden_sizes +[1]

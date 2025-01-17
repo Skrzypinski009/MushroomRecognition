@@ -6,7 +6,7 @@ from views import network_learning_view
 from controllers import download_dataset_with_check
 
 def main(page: Page):
-    page.title = 'Mushroom Recognition'
+    page.title = 'Rozpoznawanie Grzybów'
     page.theme_mode = 'dark'
     page.window.width = 400
     page.window.height = 600

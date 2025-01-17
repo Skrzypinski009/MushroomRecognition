@@ -11,7 +11,7 @@ def classification_view(page: Page) -> View:
 
     view = View('/')
     title_control = Container(
-        Text("Mushroom Recognition", size=40), margin=40
+        Text("Rozpoznawanie Grzybów", size=40), margin=40
     )
 
     button_style = ButtonStyle(text_style=TextStyle(size=25))
@@ -21,13 +21,13 @@ def classification_view(page: Page) -> View:
         text_style=TextStyle(25),
         value='weights.txt'
     )
-    nt_button = FilledTonalButton("Network training ->", style=button_style)
+    nt_button = FilledTonalButton("Trenowanie sieci ->", style=button_style)
 
-    button_random = Container(FilledTonalButton("Randomize", 
+    button_random = Container(FilledTonalButton("Losuj", 
         style=button_style, width=200, height=50
     ), margin=30)
 
-    button_submit = Container(FilledTonalButton("Submit", 
+    button_submit = Container(FilledTonalButton("Sprawdz", 
         style=button_style, width=200, height=50
     ), margin=30)
 
@@ -54,7 +54,7 @@ def classification_view(page: Page) -> View:
             idx = 11 * i + j
             options = [ dropdown.Option(option) for option in variable_data[idx]['options'] ]
             rows.append(Row(controls=[
-                Text(variable_data[idx]['name'], size=25, width=300),
+                Text(variable_data[idx]['name'], size=25, width=350),
                 Dropdown(options=options, width=200),
             ]))
         columns.append(Column(rows))
@@ -75,7 +75,7 @@ def classification_view(page: Page) -> View:
                 try:
                     rand_option: dropdown.Option = dropdown_variable.options[rand_int]
                 except:
-                    print(f"Index {rand_int} out of range")
+                    print(f"Index {rand_int} poza rozmiarem")
                 dropdown_variable.value = rand_option.key
         page.update()
     
@@ -91,7 +91,7 @@ def classification_view(page: Page) -> View:
                 values.append(encoded_value)
         selected_nn.forwardsPropagation(values)
         s = 1 if selected_nn.neurons[-1] > 0.5 else 0
-        message = "This looks like it could kill you mate." if s == 1 else "I think you can eat this"
+        message = "Prawdopodobnie trujący." if s == 1 else "Prawdopodobnie grzyb jadalny."
         popup.title=Text(message)
         popup.content = image_skull if s == 1 else image_smile
         page.open(popup)

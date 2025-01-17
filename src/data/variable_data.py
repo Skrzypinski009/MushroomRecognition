@@ -1,216 +1,229 @@
 columns = [
-    "poisonous",
-    "cap-shape",
-    "cap-surface",
-    "cap-color",
-    "bruises",
-    "odor",
-    "gill-attachment",
-    "gill-spacing",
-    "gill-size",
-    "gill-color",
-    "stalk-shape",
-    "stalk-root",
-    "stalk-surface-above-ring",
-    "stalk-surface-below-ring",
-    "stalk-color-above-ring",
-    "stalk-color-below-ring",
-    "veil-type",
-    "veil-color",
-    "ring-number",
-    "ring-type",
-    "spore-print-color",
-    "population",
-    "habitat",
+    "trujący",                     # poisonous
+    "kształt-kapelusza",           # cap-shape
+    "powierzchnia-kapelusza",      # cap-surface
+    "kolor-kapelusza",             # cap-color
+    "siniaki",                     # bruises
+    "zapach",                      # odor
+    "przyczepność-blaszek",        # gill-attachment
+    "rozstawienie-blaszek",        # gill-spacing
+    "rozmiar-blaszek",             # gill-size
+    "kolor-blaszek",               # gill-color
+    "kształt-trzonu",              # stalk-shape
+    "korzeń-trzonu",               # stalk-root
+    "powierzchnia-trzonu-nad-pierścieniem", # stalk-surface-above-ring
+    "powierzchnia-trzonu-pod-pierścieniem", # stalk-surface-below-ring
+    "kolor-trzonu-nad-pierścieniem",       # stalk-color-above-ring
+    "kolor-trzonu-pod-pierścieniem",       # stalk-color-below-ring
+    "typ-osłony",                 # veil-type
+    "kolor-osłony",               # veil-color
+    "liczba-pierścieni",          # ring-number
+    "typ-pierścienia",            # ring-type
+    "kolor-wydruku-zarodników",   # spore-print-color
+    "populacja",                  # population
+    "siedlisko",                  # habitat
 ]
 
 variable_data = [
-    {'name': 'cap-shape', 'options': {
-        'bell': 'b',
-        'conical': 'c',
-        'convex': 'x',
-        'flat': 'f',
-        'knobbed': 'k',
-        'sunken': 's'
+    {'name': 'kształt-kapelusza', 'options': {
+        'dzwonowaty': 'b',
+        'stożkowaty': 'c',
+        'wypukły': 'x',
+        'płaski': 'f',
+        'z guzkiem': 'k',
+        'zagłębiony': 's'
     }},
 
-    {'name': 'cap-surface', 'options': {
-        'fibrous': 'f',
-        'grooves': 'g',
-        'scaly': 'y',
-        'smooth': 's'
+    {'name': 'powierzchnia-kapelusza', 'options': {
+        'włóknista': 'f',
+        'rowkowana': 'g',
+        'łuskowata': 'y',
+        'gładka': 's'
     }},
 
-    {'name': 'cap-color', 'options': {
-        "brown": 'n',
-		"buff": 'b',
-		"cinnamon": 'c',
-		"gray": 'g',
-		"green": 'r',
-		"pink": 'p',
-		"purple": 'u',
-		"red": 'e',
-		"white": 'w',
-		"yellow": 'y'
+    {'name': 'kolor-kapelusza', 'options': {
+        'brązowy': 'n',
+        'jasnobrązowy': 'b',
+        'cynamonowy': 'c',
+        'szary': 'g',
+        'zielony': 'r',
+        'różowy': 'p',
+        'purpurowy': 'u',
+        'czerwony': 'e',
+        'biały': 'w',
+        'żółty': 'y'
     }},
 
-    {'name': 'bruises', 'options': {
-        'yes': 't',
-        'no': 'f'
+    {'name': 'siniaki', 'options': {
+        'tak': 't',
+        'nie': 'f'
     }},
 
-    {'name': 'odor', 'options': {
-        'almond': 'a',
-		'anise': 'l',
-		'creosote': 'c',
-		'fishy': 'y',
-		'foul': 'f',
-		'musty': 'm',
-		'none': 'n',
-		'pungent': 'p',
-		'spicy': 's'
+    {'name': 'zapach', 'options': {
+        'migdałowy': 'a',
+        'anyżowy': 'l',
+        'kreozotowy': 'c',
+        'rybny': 'y',
+        'nieprzyjemny': 'f',
+        'stęchły': 'm',
+        'żaden': 'n',
+        'ostry': 'p',
+        'korzenny': 's'
     }},
 
-    {'name': 'gill-attachment', 'options': {
-        "attached": "a",
-		"descending": "d",
-		"free": "f",
-		"notched": "n"
+    {'name': 'przyczepność-blaszek', 'options': {
+        "przyczepione": "a",
+        "opadające": "d",
+        "wolne": "f",
+        "wycięte": "n"
     }},
 
-    {'name': 'gill-spacing', 'options': {
-        "close": "c",
-		"crowded": "w",
-		"distant": "d"
+    {'name': 'rozstawienie-blaszek', 'options': {
+        "bliskie": "c",
+        "stłoczone": "w",
+        "odległe": "d"
     }},
 
-    {'name': 'gill-size', 'options': {
-        "broad": "b",
-		"narrow": "n"
+    {'name': 'rozmiar-blaszek', 'options': {
+        "szerokie": "b",
+        "wąskie": "n"
     }},
-    {'name': 'gill-color', 'options': {
-        "black": "k",
-		"brown": "n",
-		"buff": "b",
-		"chocolate": "h",
-		"gray": "g",
-        "green": "r",
-		"orange": "o",
-		"pink": "p",
-		"purple": "u",
-		"red": "e",
-        "white": "w",
-		"yellow": "y"
+
+    {'name': 'kolor-blaszek', 'options': {
+        "czarny": "k",
+        "brązowy": "n",
+        "jasnobrązowy": "b",
+        "czekoladowy": "h",
+        "szary": "g",
+        "zielony": "r",
+        "pomarańczowy": "o",
+        "różowy": "p",
+        "purpurowy": "u",
+        "czerwony": "e",
+        "biały": "w",
+        "żółty": "y"
     }},
-    {'name': 'stalk-shape', 'options': {
-        "enlarging": "e",
-		"tapering": "t"
+
+    {'name': 'kształt-trzonu', 'options': {
+        "powiększający się": "e",
+        "zwężający się": "t"
     }},
-    {'name': 'stalk-root', 'options': {
-        "bulbous": "b",
-		"club": "c",
-		"cup": "u",
-		"equal": "e",
-		 "rhizomorphs": "z",
-		"rooted": "r",
-		"missing": "?"
+
+    {'name': 'korzeń-trzonu', 'options': {
+        "bulwiasty": "b",
+        "maczugowaty": "c",
+        "kubkowaty": "u",
+        "równy": "e",
+        "ryzomorfy": "z",
+        "zakorzeniony": "r",
+        "brak": "?"
     }},
-		
-    {'name': 'stalk-surface-above-ring', 'options': {
-        "fibrous": "f",
-		"scaly": "y",
-		"silky": "k",
-		"smooth": "s"
+    
+    {'name': 'powierzchnia-trzonu-nad-pierścieniem', 'options': {
+        "włóknista": "f",
+        "łuskowata": "y",
+        "jedwabista": "k",
+        "gładka": "s"
     }},
-    {'name': 'stalk-surface-below-ring', 'options': {
-        "fibrous": "f",
-		"scaly": "y",
-		"silky": "k",
-		"smooth": "s"
+
+    {'name': 'powierzchnia-trzonu-pod-pierścieniem', 'options': {
+        "włóknista": "f",
+        "łuskowata": "y",
+        "jedwabista": "k",
+        "gładka": "s"
     }},
-    {'name': 'stalk-color-above-ring', 'options': {
-        "brown": "n",
-		"buff": "b",
-		"cinnamon": "c",
-		"gray": "g",
-		"orange": "o",
-		 "pink": "p",
-		"red": "e",
-		"white": "w",
-		"yellow": "y"
+
+    {'name': 'kolor-trzonu-nad-pierścieniem', 'options': {
+        "brązowy": "n",
+        "jasnobrązowy": "b",
+        "cynamonowy": "c",
+        "szary": "g",
+        "pomarańczowy": "o",
+        "różowy": "p",
+        "czerwony": "e",
+        "biały": "w",
+        "żółty": "y"
     }},
-    {'name': 'stalk-color-below-ring', 'options': {
-        "brown": "n",
-		"buff": "b",
-		"cinnamon": "c",
-		"gray": "g",
-		"orange": "o",
-		 "pink": "p",
-		"red": "e",
-		"white": "w",
-		"yellow": "y"
+
+    {'name': 'kolor-trzonu-pod-pierścieniem', 'options': {
+        "brązowy": "n",
+        "jasnobrązowy": "b",
+        "cynamonowy": "c",
+        "szary": "g",
+        "pomarańczowy": "o",
+        "różowy": "p",
+        "czerwony": "e",
+        "biały": "w",
+        "żółty": "y"
     }},
-    {'name': 'veil-type', 'options': {
-        "partial": "p",
-		"universal": "u"
+
+    {'name': 'typ-osłony', 'options': {
+        "częściowa": "p",
+        "uniwersalna": "u"
     }},
-    {'name': 'veil-color', 'options': {
-        "brown": "n",
-		"orange": "o",
-		"white": "w",
-		"yellow": "y"
+
+    {'name': 'kolor-osłony', 'options': {
+        "brązowy": "n",
+        "pomarańczowy": "o",
+        "biały": "w",
+        "żółty": "y"
     }},
-    {'name': 'ring-number', 'options': {
-        "none": "n",
-		"one": "o",
-		"two": "t"
+
+    {'name': 'liczba-pierścieni', 'options': {
+        "brak": "n",
+        "jeden": "o",
+        "dwa": "t"
     }},
-    {'name': 'ring-type', 'options': {
-        "cobwebby": "c",
-		"evanescent": "e",
-		"flaring": "f",
-		"large": "l",
-		"none": "n",
-		"pendant": "p",
-		"sheathing": "s",
-		"zone": "z"
+
+    {'name': 'typ-pierścienia', 'options': {
+        "weloniasty": "c",
+        "zanikający": "e",
+        "rozszerzający się": "f",
+        "duży": "l",
+        "brak": "n",
+        "zwisający": "p",
+        "pochwiasty": "s",
+        "strefowy": "z"
     }},
-    {'name': 'spore-print-color', 'options': {
-        "black": "k",
-		"brown": "n",
-		"buff": "b",
-		"chocolate": "h",
-		"green": "r",
-		"orange": "o",
-		"purple": "u",
-		"white": "w",
-		"yellow": "y"
+
+    {'name': 'kolor-wydruku-zarodników', 'options': {
+        "czarny": "k",
+        "brązowy": "n",
+        "jasnobrązowy": "b",
+        "czekoladowy": "h",
+        "zielony": "r",
+        "pomarańczowy": "o",
+        "purpurowy": "u",
+        "biały": "w",
+        "żółty": "y"
     }},
-    {'name': 'population', 'options': {
-        "abundant": "a",
-		"clustered": "c",
-		"numerous": "n",
-		"scattered": "s",
-		"several": "v",
-		"solitary": "y"
+
+    {'name': 'populacja', 'options': {
+        "obfita": "a",
+        "skupiona": "c",
+        "liczna": "n",
+        "rozproszona": "s",
+        "kilka": "v",
+        "pojedyncza": "y"
     }},
-    {'name': 'habitat', 'options': {
-        "grasses": "g",
-		"leaves": "l",
-		"meadows": "m",
-		"paths": "p",
-		"urban": "u",
-		"waste": "w",
-		"woods": "d"
-    }},
+
+    {'name': 'siedlisko', 'options': {
+        "trawy": "g",
+        "liście": "l",
+        "łąki": "m",
+        "ścieżki": "p",
+        "miejski": "u",
+        "nieużytki": "w",
+        "lasy": "d"
+    }}
 ]
 
 encoding = {
-    "poisonous": {
+    "trujący": {
         "p": 0,
         "e": 1
     },
-    "cap-shape": {
+    "kształt-kapelusza": {
         "b": 0,
         "c": 1,
         "x": 2,
@@ -218,13 +231,13 @@ encoding = {
         "k": 4,
         "s": 5
     },
-    "cap-surface": {
+    "powierzchnia-kapelusza": {
         "f": 0,
         "g": 1,
         "y": 2,
         "s": 3
     },
-    "cap-color": {
+    "kolor-kapelusza": {
         "n": 0,
         "b": 1,
         "c": 2,
@@ -236,11 +249,11 @@ encoding = {
         "w": 8,
         "y": 9
     },
-    "bruises": {
+    "siniaki": {
         "t": 0,
         "f": 1
     },
-    "odor": {
+    "zapach": {
         "a": 0,
         "l": 1,
         "c": 2,
@@ -251,22 +264,22 @@ encoding = {
         "p": 7,
         "s": 8
     },
-    "gill-attachment": {
+    "przyczepność-blaszek": {
         "a": 0,
         "d": 1,
         "f": 2,
         "n": 3
     },
-    "gill-spacing": {
+    "rozstawienie-blaszek": {
         "c": 0,
         "w": 1,
         "d": 2
     },
-    "gill-size": {
+    "rozmiar-blaszek": {
         "b": 0,
         "n": 1
     },
-    "gill-color": {
+    "kolor-blaszek": {
         "k": 0,
         "n": 1,
         "b": 2,
@@ -280,11 +293,11 @@ encoding = {
         "w": 10,
         "y": 11
     },
-    "stalk-shape": {
+    "kształt-trzonu": {
         "e": 0,
         "t": 1
     },
-    "stalk-root": {
+    "korzeń-trzonu": {
         "b": 0,
         "c": 1,
         "u": 2,
@@ -293,19 +306,19 @@ encoding = {
         "r": 5,
         "?": 6
     },
-    "stalk-surface-above-ring": {
+    "powierzchnia-trzonu-nad-pierścieniem": {
         "f": 0,
         "y": 1,
         "k": 2,
         "s": 3
     },
-    "stalk-surface-below-ring": {
+    "powierzchnia-trzonu-pod-pierścieniem": {
         "f": 0,
         "y": 1,
         "k": 2,
         "s": 3
     },
-    "stalk-color-above-ring": {
+    "kolor-trzonu-nad-pierścieniem": {
         "n": 0,
         "b": 1,
         "c": 2,
@@ -316,7 +329,7 @@ encoding = {
         "w": 7,
         "y": 8
     },
-    "stalk-color-below-ring": {
+    "kolor-trzonu-pod-pierścieniem": {
         "n": 0,
         "b": 1,
         "c": 2,
@@ -327,22 +340,22 @@ encoding = {
         "w": 7,
         "y": 8
     },
-    "veil-type": {
+    "typ-osłony": {
         "p": 0,
         "u": 1
     },
-    "veil-color": {
+    "kolor-osłony": {
         "n": 0,
         "o": 1,
         "w": 2,
         "y": 3
     },
-    "ring-number": {
+    "liczba-pierścieni": {
         "n": 0,
         "o": 1,
         "t": 2
     },
-    "ring-type": {
+    "typ-pierścienia": {
         "c": 0,
         "e": 1,
         "f": 2,
@@ -352,7 +365,7 @@ encoding = {
         "s": 6,
         "z": 7
     },
-    "spore-print-color": {
+    "kolor-wydruku-zarodników": {
         "k": 0,
         "n": 1,
         "b": 2,
@@ -363,7 +376,7 @@ encoding = {
         "w": 7,
         "y": 8
     },
-    "population": {
+    "populacja": {
         "a": 0,
         "c": 1,
         "n": 2,
@@ -371,7 +384,7 @@ encoding = {
         "v": 4,
         "y": 5
     },
-    "habitat": {
+    "siedlisko": {
         "g": 0,
         "l": 1,
         "m": 2,
