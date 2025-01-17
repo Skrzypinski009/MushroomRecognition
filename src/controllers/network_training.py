@@ -88,7 +88,7 @@ def get_numerical_data(categorical_data: pd.DataFrame) -> pd.DataFrame:
 
 def xy_data(numerical_data: pd.DataFrame) -> list[pd.DataFrame, pd.Series]:
     x = numerical_data
-    y = x.pop('poisonous')
+    y = x.pop('trujący')
     return x, y
 #end
 
@@ -142,8 +142,8 @@ def train_NN(
 def make_plot(err_arr: list, save_path: str, title: str = "") -> None:
     plt.clf()
     x = np.arange(1,len(err_arr)+1,1)
-    plt.xlabel("Iterations")
-    plt.ylabel("Error")
+    plt.xlabel("Iteracje")
+    plt.ylabel("Błąd")
     plt.title(title)
     plt.plot(x, err_arr, c="black", lw="2" )
     plt.savefig(save_path)
@@ -170,7 +170,7 @@ def train(nn: NeuralNetwork, iterations: int, plot_nr: int, view: View) -> None:
         train_features, train_target,
         test_fretures, test_target,
         iterations, 10, err_arr, view)
-    view.controls[0].controls[12].controls[0].value = "Effectiveness: " + str(get_correct_results(nn, test_fretures, test_target)['procentage']) + "%"
+    view.controls[0].controls[12].controls[0].value = "Efektywność: " + str(get_correct_results(nn, test_fretures, test_target)['procentage']) + "%"
     return err_arr
 #end
 

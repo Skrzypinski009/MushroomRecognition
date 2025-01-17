@@ -41,7 +41,7 @@ def network_learning_view(page) -> View:
 
     layers_field = TextField(width=300, text_style=h2_style)
     row2 = Row([
-        Text("Ukryte rozmiary warstw rozdzielone ','", style=h2_style),
+        Text("Rozmiary ukrytych warstw rozdzielone ','", style=h2_style),
         layers_field,
     ], alignment='center')
 
@@ -62,7 +62,7 @@ def network_learning_view(page) -> View:
     row10 = Row([dropdown_weights], alignment='center')
 
     iterations = TextField('', text_style=h2_style, text_align='center', width=50)
-    train_button = FilledTonalButton("Train", style=ButtonStyle(text_style=h2_style), width=150, height=40)
+    train_button = FilledTonalButton("Trenuj", style=ButtonStyle(text_style=h2_style), width=150, height=40)
     row11 = Row([ 
         Text('Iteracje ', style=h2_style), 
         iterations,
@@ -132,8 +132,8 @@ def network_learning_view(page) -> View:
         cur_plot_nr += 1
 
         err_arr = train(selected_nn, int(iterations.value), cur_plot_nr, view)
-        make_plot(err_arr['train'], 'data/train_err_plot' + str(cur_plot_nr) + '.png', "Training data error")
-        make_plot(err_arr['test'], 'data/test_err_plot' + str(cur_plot_nr) + '.png', "Testing data error")
+        make_plot(err_arr['train'], 'data/train_err_plot' + str(cur_plot_nr) + '.png', "Błąd na danych treningowych")
+        make_plot(err_arr['test'], 'data/test_err_plot' + str(cur_plot_nr) + '.png', "Błąd na danych testowych")
 
         training_text.visible = False
         pb.visible = False
