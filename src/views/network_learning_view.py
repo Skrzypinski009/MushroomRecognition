@@ -30,14 +30,20 @@ def network_learning_view(page) -> View:
     h1_style = TextStyle(44)
     h2_style = TextStyle(24)
     error_style = TextStyle(20, color='red')
+    button_style = ButtonStyle(text_style=h2_style)
 
     title = Text("Neural network training", style=h1_style)
     title_row = Row([title], alignment='center')
+
+    back_button = FilledTonalButton("<- Classification", style=button_style)
+    row1 = Row([back_button], alignment='center')
+
     layers_field = TextField(width=300, text_style=h2_style)
     row2 = Row([
         Text("Hidden layers sizes separeted by ','", style=h2_style),
         layers_field,
     ], alignment='center')
+
     network_name_field = TextField(width=300, text_style=h2_style)
     row5 = Row([
         Text("Name of weights:", style=h2_style),
@@ -46,6 +52,7 @@ def network_learning_view(page) -> View:
 
     create_button = FilledButton("Create", style=ButtonStyle(text_style=h2_style), width=160, height=40)
     row7 = Row([create_button], alignment='center')
+
     error_message = Text("", style=error_style)
     row8 = Row([error_message], alignment='center')
 
@@ -67,6 +74,7 @@ def network_learning_view(page) -> View:
 
     view.controls = [Column([
         title_row,
+        row1,
         row2,
         row5,
         row7,
@@ -114,10 +122,12 @@ def network_learning_view(page) -> View:
         view.update()
 
     def create_pressed(e: ControlEvent):
-        sizes = [22] + get_list_from(layers_field.value) +[1]
-        if not sizes:
+        hidden_sizes = get_list_from(layers_field.value)
+        if not hidden_sizes:
             error_message.value = "Layers sizes input is not correct"
+            page.update()
             return
+        sizes = [22] + hidden_sizes +[1]
         name = network_name_field.value.strip()
         NeuralNetwork(sizes, True).save_to_file('data/weights/' + name)
         refresh_dropdown()
@@ -135,4 +145,5 @@ def network_learning_view(page) -> View:
     create_button.on_click=create_pressed
     dropdown_weights.on_change=nn_selected
     train_button.on_click = train_pressed
+    back_button.on_click = lambda e: page.go('/')
     return view
