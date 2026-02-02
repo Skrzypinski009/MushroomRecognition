@@ -1,6 +1,6 @@
 # Mushroom Recognition
 
-UI app for running neural network, that is predicting whether a  mushroom with given characterictics is poisonous or edible. <br>
+A deep learning-based UI application for predicting mushroom edibility based on morphological characteristics. <br>
 
 This project is licensed under the terms of the MIT license. <br>
 
@@ -8,7 +8,6 @@ This project is licensed under the terms of the MIT license. <br>
 - **Python**
 - **[Flet](https://flet.dev/)** <br>
     Python library that is build with [Flutter](https://flutter.dev/)
-- **Git with Github**
 
 
 ## Files description
